@@ -40,13 +40,14 @@ public class AppCliente {
 					datosSalida.writeUTF(mensajeUser);
 				}
 				
-			}while(mensajeUser != "[" + nombreUser + "]  " + "*");
+			}while(mensajeUser != "*");
+			
 //			String mensajeUser = "hhhhhhhhhhhhhhhh";
-			
+//			
 //			datosSalida.writeUTF(mensajeUser);
-			
-			String mensajeServidor = datosEntrada.readUTF();			
-			System.out.println("Mensaje desde el servidor." + mensajeServidor);
+//			
+//			String mensajeServidor = datosEntrada.readUTF();			
+//			System.out.println("Mensaje desde el servidor: " + mensajeServidor);
 			
 			socketCliente.close();							//Cierro el socket del cliente	
 			
