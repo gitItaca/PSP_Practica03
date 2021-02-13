@@ -7,8 +7,8 @@ import java.net.Socket;
 
 public class AtiendeServidor extends Thread{
 	
-	DataInputStream entrada;
 	Socket conexion;
+	DataInputStream entrada;	
 
 //CONSTRUCTOR
 	public AtiendeServidor(Socket conexion) throws IOException {
@@ -16,20 +16,16 @@ public class AtiendeServidor extends Thread{
 		this.conexion = conexion;
 	}
 
-
 //METODOS
 	@Override
 	public void run() {
-		try {
-			
-			DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());
-			
-			//while(salida != null) {
+		try {			
+//			DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());			
+			while(true) {
 				String salidaString = entrada.readUTF();
 				System.out.println("Mensaje recibido por AtiendeServidor: " + salidaString);
-			//}
-		} catch (IOException e) {
-			
+			}
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
 		

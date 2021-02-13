@@ -18,29 +18,54 @@ public class AppCliente {
 	public static void main(String[] args) {
 		
 		try {
+			//ESTABLEZCO CONEXION CON APP_SERVIDOR
 			Socket socketCliente = new Socket();								//Creo el socket del cliente.			
 			InetSocketAddress direccion = new InetSocketAddress(IP, PUERTO);	//Asigno al socket la direccion y el puerto.
-			socketCliente.connect(direccion);
+			socketCliente.connect(direccion);			
 			
+			//CREAR ATIENDE_SERVIDOR (como se indica, yo lo tenia al reves)
+			AtiendeServidor atiendeServidor = new AtiendeServidor(socketCliente);
+			atiendeServidor.start();
 			
-			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream());
+//			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream()); //Creo que no hace falta. 
 			datosSalida = new DataOutputStream(socketCliente.getOutputStream());
 			
-			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
-			atiendeCliente.start();
+			//MIRAR: No se si desde aqui se tienen que escribir o tiene que mandar los datos a otra clase para que aparezcan
 			do {
 				if(nombreUser == null) {
 					System.out.println("Escribe tu nombre de usuario");
 					nombreUser = entradaTerminal.nextLine();
 					datosSalida.writeUTF(nombreUser);
 				}else {
-					mensajeUser = "[" + nombreUser + "]  ";
+					String escriboNombre = "Desde AppCliente" + "[" + nombreUser + "]  ";
+					System.out.print(escriboNombre);
+					mensajeUser = entradaTerminal.nextLine();
 					System.out.println(mensajeUser);
-					mensajeUser = mensajeUser + entradaTerminal.nextLine();
-					datosSalida.writeUTF(mensajeUser);
-				}
-				
+					
+					String nombreUserYMensaje = escriboNombre + mensajeUser;
+					datosSalida.writeUTF(nombreUserYMensaje);
+					
+					
+				}				
 			}while(mensajeUser != "*");
+			
+			
+			//(Lo pongo en appServidor) 
+//			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
+//			atiendeCliente.start();
+//			do {
+//				if(nombreUser == null) {
+//					System.out.println("Escribe tu nombre de usuario");
+//					nombreUser = entradaTerminal.nextLine();
+//					datosSalida.writeUTF(nombreUser);
+//				}else {
+//					mensajeUser = "[" + nombreUser + "]  ";
+//					System.out.println(mensajeUser);
+//					mensajeUser = mensajeUser + entradaTerminal.nextLine();
+//					datosSalida.writeUTF(mensajeUser);
+//				}
+//				
+//			}while(mensajeUser != "*");
 			
 //			String mensajeUser = "hhhhhhhhhhhhhhhh";
 //			
