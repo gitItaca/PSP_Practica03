@@ -8,6 +8,7 @@ public class AtiendeCliente extends Thread{
 	
 	Socket conexion;
 	DataInputStream entrada;
+	Monitor monitor = null;
 
 //CONSTRUCTOR
 	public AtiendeCliente(Socket conexion) throws IOException {
@@ -20,8 +21,9 @@ public class AtiendeCliente extends Thread{
 	public void run() {
 		try {	
 			
-			while(true) {				
-				String mensaje = entrada.readUTF();
+			while(true) {	
+				
+				String mensaje = entrada.readUTF();	
 				System.out.println(mensaje);				
 			}
 			

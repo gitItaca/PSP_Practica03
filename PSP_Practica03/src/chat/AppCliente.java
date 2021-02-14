@@ -15,6 +15,7 @@ public class AppCliente {
 	static String nombreUser;
 	static String mensajeUser;
 
+//Establece conexiones con el servidor, lee mensajes del terminal y se los envia al servidor.
 	public static void main(String[] args) {
 		
 		try {
@@ -23,11 +24,11 @@ public class AppCliente {
 			InetSocketAddress direccion = new InetSocketAddress(IP, PUERTO);	//Asigno al socket la direccion y el puerto.
 			socketCliente.connect(direccion);			
 			
-			//CREAR ATIENDE_SERVIDOR (como se indica, yo lo tenia al reves)
+			//CREAR ATIENDE_SERVIDOR para leer los mensajes del terminal y enviarselos al servidor.
 			AtiendeServidor atiendeServidor = new AtiendeServidor(socketCliente);
 			atiendeServidor.start();
 			
-//			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream()); //Creo que no hace falta. 
+			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream()); //Recibir mensaje de AtiendeCliente? 
 			datosSalida = new DataOutputStream(socketCliente.getOutputStream());
 			
 			//MIRAR: No se si desde aqui se tienen que escribir o tiene que mandar los datos a otra clase para que aparezcan
@@ -43,9 +44,7 @@ public class AppCliente {
 					System.out.println(mensajeUser);
 					
 					String nombreUserYMensaje = escriboNombre + mensajeUser;
-					datosSalida.writeUTF(nombreUserYMensaje);
-					
-					
+					datosSalida.writeUTF(nombreUserYMensaje);						
 				}				
 			}while(mensajeUser != "*");
 			

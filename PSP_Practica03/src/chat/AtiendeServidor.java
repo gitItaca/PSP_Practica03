@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+//Recibe los mensajes del servidor y los escribe en el terminal.
 public class AtiendeServidor extends Thread{
 	
 	Socket conexion;
