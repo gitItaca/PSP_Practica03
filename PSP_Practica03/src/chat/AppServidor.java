@@ -9,11 +9,14 @@ import java.net.InetSocketAddress;
 
 
 public class AppServidor {
-	static final int PUERTO = 2006;
+	static final int PUERTO = 2010;
 	static final int MAX_CONEXIONES = 10;
 	
 	public static void main(String[] args) {
+		new AppServidor().run();
+	}//FIN MAIN
 	
+	public void run() {
 		try {
 			//ABRO CONEXION
 			ServerSocket serverSocket = new ServerSocket();						//Creo el socket servidor.
@@ -21,23 +24,21 @@ public class AppServidor {
 			InetSocketAddress direccion = new InetSocketAddress("localhost", PUERTO);
 			serverSocket.bind(direccion);							//Asigno al socket la direccion y el puerto.
 			System.out.println("Escuchando puerto " + PUERTO);
-						
-			//Creo que es mejor crearlos en otro sitio.
-			Socket newSocket = serverSocket.accept();				//Creo un socket nuevo y acepto conexiones.
 			
-			//CREO ATIENDE_CLIENTE 
-			AtiendeCliente atiendeCliente = new AtiendeCliente(newSocket);
-			atiendeCliente.start();		//Arranco el hilo de AtiendeCliente con el socket del servidor. AtiendeCliente recogera la informacion, la leera y la escribira.
-
-			//newSocket.close();									//Cierro el nuevo socket.
-			//serverSocket.close();									//Cierro el socket servidor.
+			while (true) {			
+				Socket clienteSocket = serverSocket.accept();		//Creo un socket nuevo y acepto nuevos clientes.
+				
+				//CREO ATIENDE_CLIENTE 
+				AtiendeCliente atiendeCliente = new AtiendeCliente(clienteSocket);
+				atiendeCliente.start();		//Arranco el hilo de AtiendeCliente con el socket del servidor. AtiendeCliente recogera la informacion, la leera y la escribira.
+				
+				//newSocket.close();									//Cierro el nuevo socket.
+				//serverSocket.close();									//Cierro el socket servidor.
+			}
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}	
-
-
-	}//FIN MAIN
-	
+	}
 	
 }
 

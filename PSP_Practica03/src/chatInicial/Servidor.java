@@ -8,7 +8,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Servidor {
-	static final int PUERTO = 2009;
+	static final int PUERTO = 2211;
 	
 	public static void main(String[] args) {
 		try {
@@ -22,15 +22,18 @@ public class Servidor {
 		
 			Socket newSocket = serverSocket.accept();	
 			
-			DataInputStream datosEntrada = new DataInputStream(newSocket.getInputStream()); //Recibir mensaje de AtiendeCliente? 
+			DataInputStream datosEntrada = new DataInputStream(newSocket.getInputStream()); 
 			DataOutputStream datosSalida = new DataOutputStream(newSocket.getOutputStream());
 			
-			String mensaje = datosEntrada.readUTF();
+			while (true) {
+				String mensaje = datosEntrada.readUTF();
+				System.out.println("Mensaje recibido: " + mensaje);
+			}
 			
-			System.out.println("Mensaje recibido: " + mensaje);
 			
-			newSocket.close();
-			serverSocket.close();
+			
+//			newSocket.close();
+//			serverSocket.close();
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}		

@@ -31,7 +31,6 @@ public class AppCliente {
 			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream()); //Recibir mensaje de AtiendeCliente? 
 			datosSalida = new DataOutputStream(socketCliente.getOutputStream());
 			
-			//MIRAR: No se si desde aqui se tienen que escribir o tiene que mandar los datos a otra clase para que aparezcan
 			do {
 				if(nombreUser == null) {
 					System.out.println("Escribe tu nombre de usuario");
@@ -48,31 +47,6 @@ public class AppCliente {
 				}				
 			}while(mensajeUser != "*");
 			
-			
-			//(Lo pongo en appServidor) 
-//			AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
-//			atiendeCliente.start();
-//			do {
-//				if(nombreUser == null) {
-//					System.out.println("Escribe tu nombre de usuario");
-//					nombreUser = entradaTerminal.nextLine();
-//					datosSalida.writeUTF(nombreUser);
-//				}else {
-//					mensajeUser = "[" + nombreUser + "]  ";
-//					System.out.println(mensajeUser);
-//					mensajeUser = mensajeUser + entradaTerminal.nextLine();
-//					datosSalida.writeUTF(mensajeUser);
-//				}
-//				
-//			}while(mensajeUser != "*");
-			
-//			String mensajeUser = "hhhhhhhhhhhhhhhh";
-//			
-//			datosSalida.writeUTF(mensajeUser);
-//			
-//			String mensajeServidor = datosEntrada.readUTF();			
-//			System.out.println("Mensaje desde el servidor: " + mensajeServidor);
-			
 			socketCliente.close();							//Cierro el socket del cliente	
 			
 		} catch (IOException e) {			
@@ -82,7 +56,29 @@ public class AppCliente {
 	}
 
 }
+//(Lo pongo en appServidor) 
+//AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
+//atiendeCliente.start();
+//do {
+//	if(nombreUser == null) {
+//		System.out.println("Escribe tu nombre de usuario");
+//		nombreUser = entradaTerminal.nextLine();
+//		datosSalida.writeUTF(nombreUser);
+//	}else {
+//		mensajeUser = "[" + nombreUser + "]  ";
+//		System.out.println(mensajeUser);
+//		mensajeUser = mensajeUser + entradaTerminal.nextLine();
+//		datosSalida.writeUTF(mensajeUser);
+//	}
+//	
+//}while(mensajeUser != "*");
 
+//String mensajeUser = "hhhhhhhhhhhhhhhh";
+//
+//datosSalida.writeUTF(mensajeUser);
+//
+//String mensajeServidor = datosEntrada.readUTF();			
+//System.out.println("Mensaje desde el servidor: " + mensajeServidor);
 
 //InputStream is = socketCliente.getInputStream();
 //OutputStream os = socketCliente.getOutputStream();

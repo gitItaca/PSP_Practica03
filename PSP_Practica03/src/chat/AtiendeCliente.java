@@ -19,14 +19,13 @@ public class AtiendeCliente extends Thread{
 //METODOS
 	@Override
 	public void run() {
-		try {	
-			
+		try {				
 			while(true) {	
 				
 				String mensaje = entrada.readUTF();	
 				System.out.println(mensaje);				
 			}
-			
+//			conexion.close(); //cierro la conexion
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
