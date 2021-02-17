@@ -11,10 +11,6 @@ public class AppServidor {
 	static final int MAX_CONEXIONES = 10;
 	
 	public static void main(String[] args) {
-		new AppServidor().run();
-	}//FIN MAIN
-	
-	public void run() {
 		try {
 			//ABRO CONEXION
 			@SuppressWarnings("resource")
@@ -24,8 +20,11 @@ public class AppServidor {
 			serverSocket.bind(direccion);							//Asigno al socket la direccion y el puerto.
 			System.out.println("Escuchando puerto " + PUERTO);
 			
-			while (true) {			
+			while (true) {					
 				Socket clienteSocket = serverSocket.accept();		//Creo un socket nuevo y acepto nuevos clientes.
+				Monitor.setSocket(clienteSocket);					//Guardo el socket del cliente en el arrayList del Monitor.
+				
+				//Tengo que guardar el socket en el monitor y en el monitor.
 				
 				//CREO ATIENDE_CLIENTE 
 				AtiendeCliente atiendeCliente = new AtiendeCliente(clienteSocket);
@@ -37,7 +36,8 @@ public class AppServidor {
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}	
-	}
+	}//FIN MAIN
+	
 	
 }
 

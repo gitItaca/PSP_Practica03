@@ -18,11 +18,7 @@ public class AppCliente {
 
 //Establece conexiones con el servidor, lee mensajes del terminal y se los envia al servidor.
 	public static void main(String[] args) {
-		new AppCliente().run();
 		
-	}//FIN MAIN
-	
-	public void run() {
 		try {
 			//ESTABLEZCO CONEXION CON APP_SERVIDOR
 			Socket socketCliente = new Socket();								//Creo el socket del cliente.			
@@ -56,9 +52,10 @@ public class AppCliente {
 			
 		} catch (IOException e) {			
 			e.printStackTrace();
-		}						
+		}			
 		
-	}
+	}//FIN MAIN
+	
 
 }
 //(Lo pongo en appServidor) 

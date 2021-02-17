@@ -1,6 +1,7 @@
 package chat;
 
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Monitor {
 
@@ -8,7 +9,7 @@ public class Monitor {
 	private int conexionesTotales;
 	private int conexionesActuales;
 	
-	private static Socket[] sockets;
+	private static ArrayList<Socket> sockets = new ArrayList<Socket>();
 	private static String mensaje;
 	
 //CONSTRUCTOR
@@ -24,24 +25,17 @@ public class Monitor {
 	public int getConexionesActuales() {
 		return conexionesActuales;
 	}
+	
+	public static ArrayList<Socket> getSockets() {
+		return sockets;
+	}
+
+	public static void setSocket(Socket socket) {
+		Monitor.sockets.add(socket);
+	}
 
 	public static String getMensaje() {
 		return mensaje;
-	}
-
-	public static void setSockets(Socket[] sockets) {
-		Monitor.sockets = sockets;
-	}
-	
-	public static void setSocket(Socket socket) {
-		for(int x = 0; x<sockets.length; x++) {
-			if(Monitor.sockets[x] == null) {
-				Monitor.sockets[x] = socket;
-			}else {
-				System.out.println("Espacio lleno.");
-			}			
-		}
-		
 	}
 	
 	public static void setMensaje(String mensaje, String nombreUser) {
@@ -49,3 +43,19 @@ public class Monitor {
 	}
 	
 }
+
+
+//public static void setSockets(Socket[] sockets) {
+//	Monitor.sockets = sockets;
+//}
+//
+//public static void setSocket(Socket socket) {
+//	for(int x = 0; x<sockets.length; x++) {
+//		if(Monitor.sockets[x] == null) {
+//			Monitor.sockets[x] = socket;
+//		}else {
+//			System.out.println("Espacio lleno.");
+//		}			
+//	}
+//	
+//}
