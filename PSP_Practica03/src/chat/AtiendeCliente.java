@@ -4,12 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class AtiendeCliente extends Thread{
 	
 	Socket conexion;
 	DataInputStream entrada;
-//	DataOutputStream salida;
+	DataOutputStream salida;
 	Monitor monitor = null;
 
 //CONSTRUCTOR
@@ -26,9 +27,17 @@ public class AtiendeCliente extends Thread{
 			while(true) {	
 				//Lee los mensajes de los clientes y los imprime.
 				String mensaje = entrada.readUTF();	
-				System.out.println(mensaje);		
+				System.out.println(mensaje);
+//				Monitor.setMensaje(mensaje); 	//Guardo los mensajes en el monitor
 				
-//				salida.writeUTF(mensaje);
+				ArrayList<Socket> listaSockets = Monitor.getSockets();	//Cargo la ista de los sockets
+				for(Socket s : listaSockets) {
+					if(s != conexion) {		//Si el socket es el mismo que el del cliente que escribe el mensaje, no se lo vuelve a enviar.
+						salida = new DataOutputStream(s.getOutputStream());
+						salida.writeUTF(mensaje);
+					}
+				}
+
 			}
 
 		} catch (IOException e) {

@@ -3,6 +3,7 @@ package chat;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.net.InetSocketAddress;
 
 
@@ -22,14 +23,13 @@ public class AppServidor {
 			
 			while (true) {					
 				Socket clienteSocket = serverSocket.accept();		//Creo un socket nuevo y acepto nuevos clientes.
-				Monitor.setSocket(clienteSocket);					//Guardo el socket del cliente en el arrayList del Monitor.
-				
-				//Tengo que guardar el socket en el monitor y en el monitor.
-				
+								
 				//CREO ATIENDE_CLIENTE 
 				AtiendeCliente atiendeCliente = new AtiendeCliente(clienteSocket);
 				atiendeCliente.start();		//Arranco el hilo de AtiendeCliente con el socket del servidor. AtiendeCliente recogera la informacion, la leera y la escribira.
 				
+				Monitor.setSocket(clienteSocket);					//Guardo el socket del cliente en el arrayList del Monitor.
+
 //				clienteSocket.close();									//Cierro el nuevo socket.
 //				serverSocket.close();									//Cierro el socket servidor.
 			}
@@ -40,33 +40,3 @@ public class AppServidor {
 	
 	
 }
-
-//do {
-//	if(nombreUser == null) {
-//		System.out.println("Escribe tu nombre de usuario");
-//		nombreUser = entradaTerminal.nextLine();
-//		datosSalida.writeUTF(nombreUser);
-//	}else {
-//		mensajeUser = "[" + nombreUser + "]  ";
-//		System.out.println(mensajeUser);
-//		mensajeUser = mensajeUser + entradaTerminal.nextLine();
-//		datosSalida.writeUTF(mensajeUser);
-//	}
-//	
-//}while(mensajeUser != "*");
-
-
-//(Lo pongo en appCliente) Abro un hilo de "atiendeServidor" con el socket creado.
-//AtiendeServidor atiendeServidor = new AtiendeServidor(newSocket);
-//atiendeServidor.start();
-
-//(Fue antes de creat las clases de Atiende)
-//DataInputStream datosEntrada = new DataInputStream(newSocket.getInputStream());
-//DataOutputStream datosSalida = new DataOutputStream(newSocket.getOutputStream());
-//
-//
-//String mensajeCliente = datosEntrada.readUTF();
-//System.out.println("Mensaje recibido: " + mensajeCliente);
-//
-//datosSalida.writeUTF(mensajeCliente);			
-//

@@ -29,7 +29,6 @@ public class AppCliente {
 			AtiendeServidor atiendeServidor = new AtiendeServidor(socketCliente);
 			atiendeServidor.start();
 			
-			DataInputStream datosEntrada = new DataInputStream(socketCliente.getInputStream()); //Recibir mensaje de AtiendeCliente? 
 			datosSalida = new DataOutputStream(socketCliente.getOutputStream());
 			
 			do {
@@ -38,9 +37,9 @@ public class AppCliente {
 					nombreUser = entradaTerminal.nextLine();
 					datosSalida.writeUTF(nombreUser + " se acaba de conectar.");
 				}else {
-					String escriboNombre = "Desde AppCliente" + "[" + nombreUser + "]  ";
-					System.out.print(escriboNombre);
+					String escriboNombre = "[" + nombreUser + "]  ";					
 					mensajeUser = entradaTerminal.nextLine();
+					System.out.print(escriboNombre);
 					System.out.println(mensajeUser);
 					
 					String nombreUserYMensaje = escriboNombre + mensajeUser;
@@ -58,29 +57,3 @@ public class AppCliente {
 	
 
 }
-//(Lo pongo en appServidor) 
-//AtiendeCliente atiendeCliente = new AtiendeCliente(socketCliente);
-//atiendeCliente.start();
-//do {
-//	if(nombreUser == null) {
-//		System.out.println("Escribe tu nombre de usuario");
-//		nombreUser = entradaTerminal.nextLine();
-//		datosSalida.writeUTF(nombreUser);
-//	}else {
-//		mensajeUser = "[" + nombreUser + "]  ";
-//		System.out.println(mensajeUser);
-//		mensajeUser = mensajeUser + entradaTerminal.nextLine();
-//		datosSalida.writeUTF(mensajeUser);
-//	}
-//	
-//}while(mensajeUser != "*");
-
-//String mensajeUser = "hhhhhhhhhhhhhhhh";
-//
-//datosSalida.writeUTF(mensajeUser);
-//
-//String mensajeServidor = datosEntrada.readUTF();			
-//System.out.println("Mensaje desde el servidor: " + mensajeServidor);
-
-//InputStream is = socketCliente.getInputStream();
-//OutputStream os = socketCliente.getOutputStream();

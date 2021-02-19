@@ -10,6 +10,7 @@ public class Monitor {
 	private int conexionesActuales;
 	
 	private static ArrayList<Socket> sockets = new ArrayList<Socket>();
+	private static ArrayList<String> mensajes;
 	private static String mensaje;
 	
 //CONSTRUCTOR
@@ -38,24 +39,10 @@ public class Monitor {
 		return mensaje;
 	}
 	
-	public static void setMensaje(String mensaje, String nombreUser) {
-		Monitor.mensaje = nombreUser + ": " + mensaje;
+	public static void setMensaje(String mensaje) {
+		Monitor.mensaje = mensaje;
+//		Monitor.mensajes.add(mensaje);
 	}
 	
 }
 
-
-//public static void setSockets(Socket[] sockets) {
-//	Monitor.sockets = sockets;
-//}
-//
-//public static void setSocket(Socket socket) {
-//	for(int x = 0; x<sockets.length; x++) {
-//		if(Monitor.sockets[x] == null) {
-//			Monitor.sockets[x] = socket;
-//		}else {
-//			System.out.println("Espacio lleno.");
-//		}			
-//	}
-//	
-//}

@@ -24,7 +24,7 @@ public class AtiendeServidor extends Thread{
 //			DataOutputStream salida = new DataOutputStream(conexion.getOutputStream());			
 			while(true) {
 				String salidaString = entrada.readUTF(); //El readUTF es bloqueante, por eso lo ponemos en un hilo.
-				System.out.println("Mensaje recibido por AtiendeServidor: " + salidaString);
+				System.out.println(salidaString);
 			}
 		} catch (IOException e) {			
 			e.printStackTrace();
