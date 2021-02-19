@@ -21,9 +21,12 @@ public class AppServidor {
 			serverSocket.bind(direccion);							//Asigno al socket la direccion y el puerto.
 			System.out.println("Escuchando puerto " + PUERTO);
 			
-			while (true) {					
+			int conexionesContador = 0;
+			while (conexionesContador<MAX_CONEXIONES) {					
 				Socket clienteSocket = serverSocket.accept();		//Creo un socket nuevo y acepto nuevos clientes.
-								
+				conexionesContador++;
+				Monitor.setConexionesActuales(conexionesContador);	
+				
 				//CREO ATIENDE_CLIENTE 
 				AtiendeCliente atiendeCliente = new AtiendeCliente(clienteSocket);
 				atiendeCliente.start();		//Arranco el hilo de AtiendeCliente con el socket del servidor. AtiendeCliente recogera la informacion, la leera y la escribira.
@@ -33,6 +36,7 @@ public class AppServidor {
 //				clienteSocket.close();									//Cierro el nuevo socket.
 //				serverSocket.close();									//Cierro el socket servidor.
 			}
+			System.out.println("Máximas conexiones alcanzadas.");
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}	

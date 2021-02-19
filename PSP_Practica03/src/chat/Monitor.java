@@ -7,7 +7,7 @@ public class Monitor {
 
 	private final int MAX_CONEXIONES_SIMULTANEAS = 5;
 	private int conexionesTotales;
-	private int conexionesActuales;
+	private int conexionesActuales = 0;
 	
 	private static ArrayList<Socket> sockets = new ArrayList<Socket>();
 	private static ArrayList<String> mensajes;
@@ -27,6 +27,10 @@ public class Monitor {
 		return conexionesActuales;
 	}
 	
+	public static void setConexionesActuales(int conexionesActuales) {
+		conexionesActuales = conexionesActuales;
+	}
+
 	public static ArrayList<Socket> getSockets() {
 		return sockets;
 	}
